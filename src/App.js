@@ -6,47 +6,46 @@ import RightBar from "./js/rightBar";
 import Header from "./js/header";
 
 function App() {
-  const [resolution, setResolution] = useState(3)
-  const [theme, setTheme] = useState(0)
+  const RESOLUTION = 4
   const [win, setWin] = useState(false)
   const [error, setError] = useState(false)
-  const [grid, setGrid] = useState([])
+  const [mapA, setMapA] = useState([])
+  const [mapB, setMapB] = useState([])
 
   useEffect(_=>reset(), [])
-  useEffect(_=>reset(), [resolution])
 
   function reset(){
-    setGrid(fillGrid())
+    setMapA(fillGrid())
+    setMapB(fillGrid())
     setWin(false)
   }
 
+  function setShip(grid, size=1){
+    let x = Math.floor(Math.random() * RESOLUTION)
+    let y = Math.floor(Math.random() * RESOLUTION)
+    if(
+      !grid[y-1]?.[x-1] && !grid[y-1]?.[x] && !grid[y-1]?.[x+1] &&
+      !grid[y]?.[x-1]   && !grid[y]?.[x]   && !grid[y]?.[x+1] &&
+      !grid[y+1]?.[x-1] && !grid[y+1]?.[x] && !grid[y+1]?.[x+1]    
+    ){
+      grid[y][x] = '+'
+      return grid
+    } else {
+      return setShip(grid, size)
+    }
+  }
+
   function fillGrid(){
-    // створюємо квадратний масив з resolution^2 чисел 1 з яких порожня
-    const numbers = [...Array(resolution * resolution - 1).keys(), null].sort(_ => Math.random() > 0.5 ? 1 : -1);
+    let grid = Array.from({length: RESOLUTION}, _ => Array(RESOLUTION).fill(null));
 
-    return isValid(numbers) ? numbers.reduce((acc, n, i) => {
-        if (i % resolution === 0) acc.push([])
-        acc[acc.length - 1].push(n)
-        return acc
-    }, []) : fillGrid()
+    grid = setShip(grid)
+    grid = setShip(grid)
+    grid = setShip(grid)
+    grid = setShip(grid)
+
+    console.table(grid)
+    return grid
   }
-
-  function isValid(numbers){
-    return true;
-    // const [inversions, _] = numbers.reduce(([acc, prev], elem) => [(elem !== null && prev !== null && elem < prev) ? ++acc : acc, elem], [0, 0])
-    // const emptyRowNumber = Math.trunc(numbers.findIndex(e=>e===null) / resolution)
-    // return (even(resolution) && odd(inversions)) || 
-    //   (
-    //     odd(resolution) && 
-    //     (
-    //       (even(emptyRowNumber) && even(inversions)) || 
-    //       (odd(emptyRowNumber) && odd(inversions))
-    //     )
-    //   )
-  }
-
-  function odd(i){ return !(i % 2); }
-  function even(i){ return !!(i % 2); }
 
   function showError() {
       setError(true)
@@ -56,10 +55,10 @@ function App() {
   return (
     <div className="App">
       <div className="App-header">
-        <Header {...{win}}/>
-        <LeftBar {...{resolution, setResolution}}/>
-        <Grid {...{grid, setGrid, win, setWin, showError, resolution, theme}} />
-        <RightBar {...{reset, theme, setTheme}} />
+        {/* <Header {...{win}}/> */}
+        {/* <LeftBar {...{}}/> */}
+        {/* <Grid {...{win, setWin, showError}} /> */}
+        {/* <RightBar {...{reset}} /> */}
         <Error error={error} />          
       </div>
     </div>

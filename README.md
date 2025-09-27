@@ -4,7 +4,7 @@
 
 ## See on GitHub Pages
 
-[sliding puzzle](https://lyudmiladiachenko.github.io/battleship/build/)
+[battleship](https://lyudmiladiachenko.github.io/battleship/build/)
 
 ## Run local
 

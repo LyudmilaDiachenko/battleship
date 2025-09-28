@@ -48,7 +48,7 @@ code {
   justify-content: center;
   align-items: center;
   border: 1px solid black;
-  transition: all 0.5s;
+  /* transition: all 0.5s; */
   background-image: url("/public/media/sea.jpg");
 }
 .cell.cell-vt{
@@ -75,6 +75,10 @@ code {
 .cell.cell-hs{
   background-image: url("/public/media/hs.jpg");
   transform: rotate(90deg);
+}.cell.cell-hit{
+  background-image: url("/public/media/hit.jpg");
+}.cell.cell-miss{
+  background-image: url("/public/media/miss.jpg");
 }
 
 .error-box{

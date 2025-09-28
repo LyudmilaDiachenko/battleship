@@ -100,8 +100,8 @@ function App() {
       <div className="App-header">
         {/* <Header {...{win}}/> */}
         {/* <LeftBar {...{}}/> */}
-        <Grid {...{win, setWin, showError, mapA}} />
-        {/* <RightBar {...{reset}} /> */}
+        <Grid {...{win, setWin, showError, map: mapA, setMap: setMapA}} />
+        <RightBar {...{reset}} />
         <Error error={error} />          
       </div>
     </div>

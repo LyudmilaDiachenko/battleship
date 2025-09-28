@@ -1,10 +1,24 @@
 import React, { useEffect } from "react";
 import Cell from './cell'
 
-function Grid({win, setWin, showError, mapA}) {  
+function Grid({win, setWin, showError, map, setMap}) {  
     function onClick(row, col){
-    //     if (!win){
-    //         let newGrid = [...grid]
+        if (!win){
+            let newMap = [...map]
+            let currentCell = map[row][col]
+            if (!currentCell){
+                newMap[row][col] = 'miss'
+                playSound('miss')
+                setMap(newMap)
+            } else if (currentCell === 'miss' || currentCell === 'hit'){
+                playSound('error')
+            } else if (currentCell){
+                newMap[row][col] = 'hit'
+                playSound('hit')
+                setMap(newMap)
+                validateWin(newMap)
+            }
+
     //         // newGrid[row][col] = null
             
     //         setGrid(newGrid)
@@ -12,10 +26,10 @@ function Grid({win, setWin, showError, mapA}) {
     //         playSound('turn')
     //     } else if (win) {
     //         // noop
-    //     } else {
-    //         showError()
+        } else {
+            showError()
             playSound('error')
-    //     }
+        }
     }
 
     function playSound(file){
@@ -29,14 +43,14 @@ function Grid({win, setWin, showError, mapA}) {
     }
 
     function submitWin(){
-        setWin(true)
-        playSound('win')
-        return true;
+        // setWin(true)
+        // playSound('win')
+        // return true;
     }
     
     return (
         <div className={"grid" + (win ? " win" : "")}>
-            {mapA.map((row, rowNum) => 
+            {map.map((row, rowNum) => 
                 <div key={'row-'+rowNum} className="row">
                     {row.map((col, colNum) => 
                         <Cell key={'col-'+colNum} value={col} onClick={() => onClick(rowNum, colNum)} />

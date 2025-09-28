@@ -6,7 +6,6 @@ function Cell({value, onClick}) {
         className={'cell cell-' + value}
         onClick={onClick}
     >
-      {value}
     </div>
   );
 }

@@ -48,35 +48,35 @@ code {
   justify-content: center;
   align-items: center;
   border: 1px solid black;
-  margin: 3px;
-  box-shadow: 3px 3px black;
   transition: all 0.5s;
+  background-image: url("/public/media/sea.jpg");
 }
-.cell.theme-0{
-  background-image: none !important;
+.cell.cell-vt{
+  background-image: url("/public/media/vt.jpg");
 }
-.themes{
-  width: 30vh;
-  display: block;
+.cell.cell-vm{
+  background-image: url("/public/media/vm.jpg");
 }
-.themes .cell{
-  float: left;
-  border: 1px solid rgba(0, 0, 0, 0);
-  box-sizing: border-box;
-  opacity: 0.5;
-  transition: all 0.5s;
+.cell.cell-vb{
+  background-image: url("/public/media/vb.jpg");
+}
+.cell.cell-hl{
+  background-image: url("/public/media/vb.jpg");
+  transform: rotate(90deg);
+}
+.cell.cell-hm{
+  background-image: url("/public/media/vm.jpg");
+  transform: rotate(90deg);
+}
+.cell.cell-hr{
+  background-image: url("/public/media/vt.jpg");
+  transform: rotate(90deg);
+}
+.cell.cell-hs{
+  background-image: url("/public/media/hs.jpg");
+  transform: rotate(90deg);
+}
 
-}
-.themes input{
-  display: none;
-}
-input:checked+.cell{
-  opacity: 1;
-}
-.cell-null{
-  border: none;
-  box-shadow: none;
-}
 .error-box{
   position: absolute;
   right: 20px;
